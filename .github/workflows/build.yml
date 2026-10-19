@@ -1,0 +1,38 @@
+name: Build Windows App (.exe)
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Configuration de Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Installation des dépendances
+        run: npm ci
+
+      - name: Compilation Next.js / App
+        run: npm run build
+
+      - name: Generation du .exe (Electron Builder)
+        run: npx electron-builder --win nsis --x64
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Telecharger l'executable (.exe)
+        uses: actions/upload-artifact@v4
+        with:
+          name: MonApplication-Windows
+          path: dist/*.exe
+          retention-days: 7
