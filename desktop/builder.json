@@ -1,0 +1,39 @@
+{
+  "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/entries/electron-builder.json",
+  "appId": "com.igm.manager",
+  "productName": "IGMManager",
+  "copyright": "© IGM Studio — Football Management Simulation",
+  "directories": { "output": "dist", "buildResources": "desktop/build" },
+  "files": ["desktop/**", ".next/standalone/**", ".next/static/**", "public/**"],
+  "extraMetadata": { "main": "desktop/main.js" },
+  "win": {
+    "target": [
+      { "target": "nsis", "arch": ["x64"] },
+      { "target": "msi", "arch": ["x64"] },
+      { "target": "zip", "arch": ["x64"] }
+    ],
+    "icon": "desktop/build/icon.ico",
+    "artifactName": "${productName}-${version}-${arch}.${ext}",
+    "requestedExecutionLevel": "asInvoker",
+    "signingHashAlgorithms": ["sha256"],
+    "rfc3161TimeStampServer": "http://timestamp.digicert.com"
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "IGM Manager",
+    "installerIcon": "desktop/build/icon.ico",
+    "uninstallerIcon": "desktop/build/icon.ico"
+  },
+  "msi": {
+    "oneClick": false,
+    "perMachine": true,
+    "runAfterFinish": true
+  },
+  "publish": [
+    { "provider": "github", "owner": "igm-studio", "repo": "igm-manager", "releaseType": "draft" }
+  ]
+}
