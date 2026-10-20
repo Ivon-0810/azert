@@ -1,32 +1,49 @@
 {
-  "name": "nextjs-postgresql-template",
+  "name": "igm-manager",
+  "version": "1.0.0",
+  "description": "Application de traçabilité et de gestion IGM Manager",
+  "main": "desktop/main.js",
+  "author": "Ivon-0810",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "lint": "next lint"
   },
   "dependencies": {
-    "dotenv": "17.3.1",
-    "drizzle-orm": "0.45.2",
-    "next": "16.2.6",
-    "pg": "8.20.0",
-    "react": "19.2.6",
-    "react-dom": "19.2.6"
+    "next": "^14.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "4.1.17",
-    "@types/node": "22.19.15",
-    "@types/pg": "8.18.0",
-    "@types/react": "19.2.14",
-    "@types/react-dom": "19.2.3",
-    "drizzle-kit": "0.31.10",
-    "eslint": "9.39.4",
-    "eslint-config-next": "16.2.6",
-    "postcss": "8.5.8",
-    "tailwindcss": "4.1.17",
-    "typescript": "5.9.3"
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.3.0",
+    "electron": "^30.0.0",
+    "electron-builder": "^24.13.0",
+    "typescript": "^5.4.0"
+  },
+  "build": {
+    "appId": "com.igmmanager.app",
+    "productName": "IGM Manager",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "desktop/**/*",
+      "src/**/*",
+      ".next/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   }
 }
